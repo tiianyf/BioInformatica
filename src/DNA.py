@@ -4,15 +4,15 @@ from random import randint, randrange
 class DNA(object):
 
     @staticmethod
-    def criar_sequencia_aleatoria(k):
+    def criar_kmer_aleatorio(k):
         """
-        Retorna uma sequencia(lista) aleatória de tamanho k
-        :param k: tamanho (length) da sequencia desejada
+        Retorna uma sequencia(kmer) aleatória de tamanho k
+        :param k: tamanho (length) do kmer desejado.
         :rtype: list()
         :return lista de sequencia aleatoria
         """
 
-        sequencia = []
+        kmer = []
         letra = str
 
         for i in range(k):
@@ -25,51 +25,51 @@ class DNA(object):
                 letra = 'G'
             elif random == 4:
                 letra = 'C'
-            sequencia.append(letra)
+            kmer.append(letra)
 
-        return sequencia
+        return kmer
 
     @staticmethod
-    def calcular_erros(trecho, sequencia, k):
+    def calcular_erros(trecho, kmer, k):
         """
         Calcula a quantidade de erros (mutações) de um trecho em relação a
         sequencia original de tamanho k
         :param trecho:
-        :param sequencia:
+        :param kmer:
         :param k:
         :return:
         """
 
         erros = 0
         for i in range(k):
-            if trecho[i] != sequencia[i]:
+            if trecho[i] != kmer[i]:
                 erros += 1
         return erros
 
-    def percorrer(self, sequencia, trecho, k):
+    def percorrer(self, kmer, trecho, k):
         """
         Slice and Switch
-        Percorre a sequencia original
+        Percorre o kmer original
         :rtype: int
         """
 
         numero_de_erros = []
-        numero_de_pulos = len(sequencia) - k + 1
+        numero_de_pulos = len(kmer) - k + 1
 
         for i in range(numero_de_pulos):
-            comparador = sequencia[i: i + k]
+            comparador = kmer[i: i + k]
             numero_de_erros.append(self.calcular_erros(trecho, comparador, k))
         return numero_de_erros
 
     def calcular_distancia(self, sequencia, k):
-        trecho = self.criar_sequencia_aleatoria(k)
+        trecho = self.criar_kmer_aleatorio(k)
         print("\nTamanho do trecho: ", len(trecho))
 
         trecho = list(trecho)
         distancia = min(self.percorrer(trecho, sequencia, k))
 
         print(f"Trecho aleatório: {''.join(trecho)}")
-        print(f"sequencia: {''.join(sequencia)}")
+        print(f"Kmer: {''.join(sequencia)}")
         print(f"A menor distância é {distancia}")
 
         return distancia
@@ -85,7 +85,7 @@ class DNA(object):
         motif = []
 
         for i in range(linha):
-            sequencia = self.criar_sequencia_aleatoria(coluna)
+            sequencia = self.criar_kmer_aleatorio(coluna)
             motif.append(sequencia)
 
         return motif
@@ -217,11 +217,33 @@ class DNA(object):
 
     @staticmethod
     def seleciona_trecho_aleatorio(k, motif):
+        """
+        Ainda não implementada/chamada/usada. Tem o mesmo propósito do método
+        'criar_motif_de_trechos_aleatorios'. Somente será usada quando alterar
+        o estilo de implementação de strings de DNA do projeto inteiro.
+        Ou seja, passar disso:
+
+        [['T', 'A', 'A', 'C'],
+        ['G', 'T', 'C', 'T'],
+        ['C', 'C', 'G', 'G'],
+        ['A', 'C', 'T', 'A'],
+        ['A', 'G', 'G', 'T']]
+
+        pra isso:
+
+        ["TTAC", "GTCT", "CCGG", "ACTA", "AGGT"]
+
+        :param k:
+        :param motif:
+        :return
+        :rtype: list
+        """
         tam_linha = len(motif[0])
         kmers = []
         for motif in motif:
-            n = randrange(tam_linha - k)
-            kmers.append(motif[n:n + k])
+            inicio_max = randrange(tam_linha - k)
+            trecho = motif[inicio_max:inicio_max + k]
+            kmers.append(trecho)
 
         return kmers
 
@@ -237,7 +259,6 @@ class DNA(object):
         """
 
         linhas = len(motif)
-        colunas = len(motif[0])
         motif_aleatorio = [[0] * k for i in range(linhas)]
 
         for i in range(linhas):
@@ -248,20 +269,6 @@ class DNA(object):
 
         return motif_aleatorio
 
-    @staticmethod
-    def remover_kmer_random(motif):
-        """
-        Dado o motif, retira uma linha aleatoriamente da matriz (deleta uma
-        sequencia), e retorna o motif alterado.
-        :param motif: o motif cuja linha (kmer) será retirado aleatoriamente.
-        :rtype: list
-        """
-
-        linha_retirada = randint(0, len(motif))
-        del (motif, motif[linha_retirada])
-
-        return motif
-
 
 def menores_distancias():
     qtd_sequencias = int(
@@ -271,7 +278,7 @@ def menores_distancias():
 
     for i in range(qtd_sequencias):
         dna = DNA()
-        sequencia = dna.criar_sequencia_aleatoria(k)
+        sequencia = dna.criar_kmer_aleatorio(k)
         somatorio.append(dna.calcular_distancia(sequencia, k))
 
     print("A soma das menores distancias é: ", sum(somatorio))
@@ -362,13 +369,79 @@ def randomized_motif_search(motif):
 
         melhor_motif.append(melhor_trecho)
 
-    # print(melhor_motif)
     return melhor_motif
 
 
-def gibbs_sampler(motif):
-    # remove linha do motif (sequencia) aleatoriamente
-    pass
+def gibbs_sampler(motif, linha, coluna, k):
+    """
+    É um trampo
+    :rtype: sei la
+    """
+
+    dna = DNA()
+    motif_original = dna.criar_motif(linha, coluna)
+    motif_random = DNA.criar_motif_de_trechos_aleatorios(motif_original, k)
+
+    # removendo linha e guardar ela posteriomente
+    index_linha_retirada = randint(0, len(motif_random))
+    kmer_retirado = motif_random[index_linha_retirada]
+    kmer_original_retirado = motif_original[index_linha_retirada]
+    del (motif_random, motif_random[index_linha_retirada])
+
+    # criando profile com o que sobrou da matriz
+    profile = DNA.profile_frequencia(motif_random)
+    profile = DNA.profile_probabilidade(profile)
+
+    lista_prob = []
+    numero_de_pulos = len(kmer_original_retirado) - k + 1
+
+    # iniciando fora do laço pra poder armazenar
+    trecho_maior_prob = []
+    maior_prob = 0.0
+    for i in range(numero_de_pulos):
+        trecho = kmer_original_retirado[i:i + k]
+        prob = DNA.calcular_probabilidade_trecho(trecho, profile)
+        lista_prob.append(prob)
+        if prob > max(lista_prob):
+            maior_prob = prob
+            trecho_maior_prob = trecho
+
+
+def gibbs(motif_original, k):
+    removed_sequence = []
+    iteracoes = len(motif_original)
+
+    # criando/zerando matriz de resultados de uma vez
+    resultado = [[''] * k for i in range(iteracoes)]
+
+    # fazer isso até o motif original não ter mais nada
+    for i in range(0, iteracoes):
+        # add em um e remove no outro
+        linha_random = randint(0, len(motif_original))
+        removed_sequence.append(motif_original[linha_random])
+        motif_original.remove(motif_original[linha_random])
+
+        # criando motif com base no original
+        motif_random = DNA.criar_motif_de_trechos_aleatorios(motif_original, k)
+
+        # criando profile com base no motif random
+        profile = DNA.profile_frequencia(motif_random)
+        profile = DNA.profile_probabilidade(profile)
+
+        # percorrendo a linha dos removidos e calculando a probabilidade para
+        # cada trecho dentro dessa linha kkk
+        numero_de_pulos = len(removed_sequence[i]) - k + 1
+
+        trecho_maior_prob = []
+        maior_prob = 0.0
+        for j in range(numero_de_pulos):
+            trecho = removed_sequence[i][j:j + k]
+            prob = DNA.calcular_probabilidade_trecho(trecho, profile)
+            if prob > maior_prob:
+                trecho_maior_prob = trecho
+
+        # armazena os trechos de maior probabilidade dentro de uma matriz
+        resultado[i].append(trecho_maior_prob)
 
 
 def main():
@@ -414,15 +487,7 @@ def main():
 
     # randomized_motif_search(motif_4)
 
-    motif_5 = [
-        ['T', 'A', 'A', 'C'],
-        ['G', 'T', 'C', 'T'],
-        ['C', 'C', 'G', 'G'],
-        ['A', 'C', 'T', 'A'],
-        ['A', 'G', 'G', 'T']
-    ]
-
-    novo_motif = DNA.remover_kmer_random(motif_5)
+    novo_motif = DNA.remover_kmer_random(motif_5, true)
     print(novo_motif)
 
 
