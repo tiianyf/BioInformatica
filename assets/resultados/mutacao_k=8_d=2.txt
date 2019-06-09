@@ -1,0 +1,32 @@
+Original: atgatcaa
+ Mutação: atgaccac
+Original: atgatcaa
+ Mutação: ataatgaa
+Original: atgatcaa
+ Mutação: ttgatcat
+Original: atgatcaa
+ Mutação: atcatcga
+Original: atgatcaa
+ Mutação: atcttcaa
+Original: atgatcaa
+ Mutação: atgatgag
+Original: atgatcaa
+ Mutação: ttgatcat
+Original: atgatcaa
+ Mutação: ttgatcat
+Original: atgatcaa
+ Mutação: atgaccac
+Original: atgatcaa
+ Mutação: ataatgaa
+Original: atgatcaa
+ Mutação: ttgatcat
+Original: atgatcaa
+ Mutação: atcatcga
+Original: atgatcaa
+ Mutação: atcttcaa
+Original: atgatcaa
+ Mutação: atgatgag
+Original: atgatcaa
+ Mutação: ttgatcat
+Original: atgatcaa
+ Mutação: ttgatcat

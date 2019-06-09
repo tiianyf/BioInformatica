@@ -1,0 +1,52 @@
+Original: tcttgatca
+ Mutação: gcatgatca
+Original: cttgatcat
+ Mutação: catgatcaa
+Original: ctcttgatc
+ Mutação: ctcatgacc
+Original: tcttgatca
+ Mutação: tcatgacca
+Original: atgatcaag
+ Mutação: atgaccacg
+Original: tcttgatca
+ Mutação: tcttggcca
+Original: cttgatcat
+ Mutação: cttggccat
+Original: tcttgatca
+ Mutação: gcatgatca
+Original: ctcttgatc
+ Mutação: ctgttgttc
+Original: ctcttgatc
+ Mutação: ctgtttatc
+Original: tcttgatca
+ Mutação: ttttcatca
+Original: cttgatcat
+ Mutação: attgataat
+Original: atgatcaag
+ Mutação: ttgatcatg
+Original: tcttgatca
+ Mutação: gcatgatca
+Original: cttgatcat
+ Mutação: catgatcaa
+Original: ctcttgatc
+ Mutação: ctcatgacc
+Original: tcttgatca
+ Mutação: tcatgacca
+Original: atgatcaag
+ Mutação: atgaccacg
+Original: tcttgatca
+ Mutação: tcttggcca
+Original: cttgatcat
+ Mutação: cttggccat
+Original: tcttgatca
+ Mutação: gcatgatca
+Original: ctcttgatc
+ Mutação: ctgttgttc
+Original: ctcttgatc
+ Mutação: ctgtttatc
+Original: tcttgatca
+ Mutação: ttttcatca
+Original: cttgatcat
+ Mutação: attgataat
+Original: atgatcaag
+ Mutação: ttgatcatg

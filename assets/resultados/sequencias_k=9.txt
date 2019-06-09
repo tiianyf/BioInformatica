@@ -1,0 +1,1 @@
+{'atgatcaag': 3, 'ctcttgatc': 3, 'tcttgatca': 3, 'cttgatcat': 3}
