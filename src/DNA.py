@@ -443,6 +443,8 @@ def gibbs(motif_original, k):
         # armazena os trechos de maior probabilidade dentro de uma matriz
         resultado[i].append(trecho_maior_prob)
 
+    return resultado
+
 
 def main():
     motif_1 = [
